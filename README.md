@@ -68,6 +68,6 @@ Deploy the Contract: Go to the "Deploy & Run Transactions" tab. Select the MyTok
 
 Interact with the Contract: Once deployed, you can interact with the contract by minting new tokens, transferring tokens, and burning tokens using the provided functions.
 
-Authors:
+Author:
 
 Ankita Chaturvedi
