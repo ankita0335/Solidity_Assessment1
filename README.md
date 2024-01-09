@@ -29,37 +29,28 @@ To run this program, follow these steps:
 pragma solidity ^0.8.0;
 
 contract MyToken {
-    string public name;                    
-    string public symbol;                   
-    uint256 public totalSupply;            
+  
+    // Public variables
+    string public tokenName = "META";
+    string public tokenAbbrv = "MTA";
+    uint256 public totalSupply = 0;
 
-    mapping(address => uint256) public balanceOf;
+    // Mapping to track balances
+    mapping(address => uint256) public balances;
 
-    constructor(string memory _name, string memory _symbol, uint256 _initialSupply) {
-        name = _name;
-        symbol = _symbol;
-        totalSupply = _initialSupply;
-        balanceOf[msg.sender] = _initialSupply; // Assign all tokens to the contract creator initially
+    // Function to mint tokens
+    function mint(address _address, uint256 _value) public {
+        totalSupply += _value;
+        balances[_address] += _value;
     }
 
-    // Mint tokens to an address
-    function mint(address _to, uint256 _amount) public {
-        require(_amount > 0, "Amount must be greater than 0");
-        totalSupply += _amount;
-        balanceOf[_to] += _amount;
-    }
-
-    // Burn tokens from an address
-    function burn(address _from, uint256 _amount) public {
-        require(balanceOf[_from] >= _amount, "Insufficient balance");
-        require(_amount > 0, "Amount must be greater than 0");
-        totalSupply -= _amount;
-        balanceOf[_from] -= _amount;
+    // Function to burn tokens
+    function burn(address _address, uint256 _value) public {
+        require(balances[_address] >= _value, "Insufficient balance");
+        totalSupply -= _value;
+        balances[_address] -= _value;
     }
 }
-
-
-
 ```
 
 Compile the Code: Navigate to the "Solidity Compiler" tab in the left-hand sidebar. Set the "Compiler" option to "0.8.0" (or another compatible version) and click on the "Compile MyToken.sol" button.
